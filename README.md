@@ -16,7 +16,41 @@ This project contains a Jupyter Notebook that demonstrates essential data prepro
   - Applying one-hot encoding to categorical columns.
   - Renaming encoded columns for clarity.
   - Dropping original categorical columns and merging encoded columns back.
+- **Label Encoding:** 
+  - Using scikit-learn's `LabelEncoder` to convert categorical columns (like `Property_Area`) into numeric codes.
+  - Adding the encoded values as new columns without dropping the originals.
+  - Useful for both ordinal and nominal data.
 - **Final Dataset:** Ensuring the dataset is clean and ready for machine learning tasks.
+
+## Example Code Snippets
+
+**One-Hot Encoding:**
+```python
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder(drop='first')
+encoded_features = encoder.fit_transform(dataset[['Gender', 'Married', 'Education','Self_Employed','Loan_Status']]).toarray()
+encoded_features = pd.DataFrame(encoded_features, columns=encoder.get_feature_names_out())
+# Rename columns if needed
+encoded_features.rename(columns={
+    'Gender_1.0': 'Gender',
+    'Married_1.0': 'Married',
+    'Education_1.0': 'Education',
+    'Self_Employed_1.0': 'Self_Employed',
+    'Loan_Status_1.0': 'Loan_Status'
+}, inplace=True)
+# Drop original columns and merge
+columns_to_drop = [col for col in ['Gender', 'Married', 'Education','Self_Employed','Loan_Status'] if col in dataset.columns]
+dataset = dataset.drop(columns=columns_to_drop, axis=1)
+dataset = pd.concat([dataset, encoded_features], axis=1)
+```
+
+**Label Encoding:**
+```python
+from sklearn.preprocessing import LabelEncoder
+labelencoder = LabelEncoder()
+labelencoder.fit(dataset['Property_Area'])
+dataset['Property_Area_Encoded'] = labelencoder.transform(dataset['Property_Area'])
+```
 
 ## Requirements
 
@@ -36,4 +70,4 @@ This project contains a Jupyter Notebook that demonstrates essential data prepro
 
 ---
 
-This notebook is a practical guide for beginners to understand and apply data preprocessing in real-world projects.
+This notebook is a practical guide for beginners to understand and apply data preprocessing (missing value handling, encoding, visualization) in real-world projects.
