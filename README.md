@@ -20,6 +20,13 @@ This project contains a Jupyter Notebook that demonstrates essential data prepro
   - Using scikit-learn's `LabelEncoder` to convert categorical columns (like `Property_Area`) into numeric codes.
   - Adding the encoded values as new columns without dropping the originals.
   - Useful for both ordinal and nominal data.
+- **Feature Scaling:**  
+  - **Standardization (Z-score Scaling):**  
+    Standardization rescales features so that they have the properties of a standard normal distribution (mean = 0 and standard deviation = 1). This is useful when your data has outliers or is not on the same scale.  
+    In the notebook, `StandardScaler` from scikit-learn is used to standardize numerical columns such as `LoanAmount`.
+  - **Normalization (Min-Max Scaling):**  
+    Normalization rescales the values into a range of [0, 1]. This is helpful when you want all features to have the same scale, especially for algorithms that are sensitive to the scale of data.  
+    In the notebook, `MinMaxScaler` from scikit-learn is used to normalize columns like `CoapplicantIncome`.
 - **Final Dataset:** Ensuring the dataset is clean and ready for machine learning tasks.
 
 ## Example Code Snippets
@@ -52,6 +59,14 @@ labelencoder.fit(dataset['Property_Area'])
 dataset['Property_Area_Encoded'] = labelencoder.transform(dataset['Property_Area'])
 ```
 
+**Standardization (Z-score Scaling):**
+- Scales features to have mean 0 and standard deviation 1.
+- Useful for algorithms that assume data is normally distributed.
+
+**Normalization (Min-Max Scaling):**
+- Scales features to a fixed range, usually [0, 1].
+- Useful when you want all features to have the same scale.
+
 ## Requirements
 
 - Python 3.x
@@ -70,4 +85,4 @@ dataset['Property_Area_Encoded'] = labelencoder.transform(dataset['Property_Area
 
 ---
 
-This notebook is a practical guide for beginners to understand and apply data preprocessing (missing value handling, encoding, visualization) in real-world projects.
+This notebook is a practical guide for beginners to understand and apply data preprocessing (missing value handling, encoding, scaling, visualization) in real-world projects.
