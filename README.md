@@ -67,6 +67,42 @@ dataset['Property_Area_Encoded'] = labelencoder.transform(dataset['Property_Area
 - Scales features to a fixed range, usually [0, 1].
 - Useful when you want all features to have the same scale.
 
+## Function Transformation for Non-Normal Data
+
+Many machine learning algorithms perform better when the input data is normally distributed. However, real-world datasets often contain features that are skewed or not normally distributed (for example, income or transaction amounts). To address this, **function transformations** are applied to convert non-normal (skewed) data into a distribution closer to normal.
+
+### Why use function transformation?
+- Reduces skewness in the data.
+- Makes patterns more visible for modeling.
+- Improves the performance of algorithms that assume normality (like linear regression).
+
+### Common Transformations
+- **Log Transformation (`np.log1p`)**: Useful for right-skewed data (e.g., income). It compresses large values and spreads out small values.
+- **Square Root Transformation**: Also reduces right skewness.
+- **Box-Cox or Yeo-Johnson Transformation**: More flexible, can handle both positive and negative values.
+
+### Example in this project
+In the notebook, the `FunctionTransformer` from scikit-learn is used with `np.log1p` to transform the `ApplicantIncome` column, making its distribution closer to normal:
+
+```python
+from sklearn.preprocessing import FunctionTransformer
+import numpy as np
+
+function_transformer = FunctionTransformer(func=np.log1p)
+dataset['ApplicantIncome'] = function_transformer.fit_transform(dataset[['ApplicantIncome']])
+```
+
+**Before transformation:**  
+ApplicantIncome is highly skewed with some very large values.
+
+**After transformation:**  
+The distribution becomes more symmetric and closer to normal, which is better for many modeling techniques.
+
+---
+
+**Tip:**  
+Always visualize your data before and after transformation (using histograms or KDE plots) to confirm the effect of the transformation.
+
 ## Requirements
 
 - Python 3.x
