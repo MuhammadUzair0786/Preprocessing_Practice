@@ -103,6 +103,34 @@ The distribution becomes more symmetric and closer to normal, which is better fo
 **Tip:**  
 Always visualize your data before and after transformation (using histograms or KDE plots) to confirm the effect of the transformation.
 
+## Feature Selection Techniques
+
+Feature selection is an important step in the data preprocessing pipeline. It helps in selecting the most relevant features for building efficient and accurate machine learning models. In this project, two popular feature selection techniques are demonstrated:
+
+### 1. Forward Feature Selection
+- **How it works:**  
+  Forward selection starts with no features and adds one feature at a time. At each step, it adds the feature that improves the model performance the most, based on a chosen metric (e.g., accuracy).
+- **When to use:**  
+  Useful when you want to build a model with the most significant features and reduce dimensionality.
+- **In this project:**  
+  The `SequentialFeatureSelector` from `mlxtend` is used with `forward=True` to perform forward selection.
+
+### 2. Backward Feature Selection
+- **How it works:**  
+  Backward selection starts with all features and removes one feature at a time. At each step, it removes the least significant feature, i.e., the one whose removal improves or least reduces model performance.
+- **When to use:**  
+  Useful when you have many features and want to eliminate those that do not contribute much to the model.
+- **In this project:**  
+  The `SequentialFeatureSelector` from `mlxtend` can be used with `forward=False` to perform backward selection.
+
+**Benefits of Feature Selection:**
+- Reduces overfitting.
+- Improves model accuracy.
+- Decreases training time.
+- Makes models easier to interpret.
+
+Both techniques help in identifying the most important features for your predictive models, leading to better performance and simpler models.
+
 ## Requirements
 
 - Python 3.x
