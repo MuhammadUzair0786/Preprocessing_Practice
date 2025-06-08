@@ -131,6 +131,51 @@ Feature selection is an important step in the data preprocessing pipeline. It he
 
 Both techniques help in identifying the most important features for your predictive models, leading to better performance and simpler models.
 
+# Train-Test Split
+
+This notebook demonstrates how to split a dataset into training and testing sets, which is a crucial step in building and evaluating machine learning models.
+
+## What is Train-Test Split?
+
+Train-test split is a technique used to divide your dataset into two parts:
+- **Training set:** Used to train your machine learning model (usually 70-80% of the data).
+- **Testing set:** Used to evaluate the performance of your model on unseen data (usually 20-30% of the data).
+
+## Why is it important?
+
+- Helps to check how well your model generalizes to new, unseen data.
+- Prevents overfitting by ensuring the model is not just memorizing the training data.
+- Provides a fair evaluation metric for your model's performance.
+
+## How is it done?
+
+In this project, the `train_test_split` function from scikit-learn is used.  
+The `random_state=42` parameter ensures that the split is reproducible every time you run the code.
+
+**Example:**
+```python
+from sklearn.model_selection import train_test_split
+
+# input_data: features, output_data: target variable
+x_train, x_test, y_train, y_test = train_test_split(
+    input_data, output_data, test_size=0.2, random_state=42
+)
+```
+- `test_size=0.2` means 20% data for testing, 80% for training.
+- `random_state=42` ensures the same split every time.
+
+## Usage Steps
+
+1. Import your dataset.
+2. Separate input features and output/target variable.
+3. Use `train_test_split` to divide the data.
+4. Use `x_train` and `y_train` for training your model.
+5. Use `x_test` and `y_test` to evaluate your model.
+
+---
+
+This notebook is a practical guide for beginners to understand and apply the train-test split technique in real-world machine learning projects.
+
 ## Requirements
 
 - Python 3.x
